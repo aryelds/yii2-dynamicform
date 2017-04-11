@@ -451,7 +451,8 @@
                 });
                 kvInitTA(id, configTypeHead, {
                     display: 'value',
-                    source: engine
+                    source: engine,
+                    limit: 10
                 });
             });
         }
