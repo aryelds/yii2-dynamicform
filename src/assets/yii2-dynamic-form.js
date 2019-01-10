@@ -196,7 +196,10 @@
 
                     widgetsOptions = widgetsOptions.reverse();
                     for (var i = identifiers.length - 1; i >= 1; i--) {
-                        identifiers[i] = $elem.closest(widgetsOptions[i].widgetItem).index();
+                        if (typeof widgetsOptions[i] !== "undefined") {
+                            identifiers[i] = $elem.closest(widgetsOptions[i].widgetItem).index();
+                        }
+                        //$(".kv-plugin-loading").addClass("hide");
                     }
                 }
 
@@ -208,8 +211,8 @@
             }
         }
 
-        if (id !== newID) {
-            $elem.closest(widgetOptions.widgetItem).find('.field-' + id).each(function () {
+        if (id !== newID && widgetOptions != undefined) {
+            $elem.closest(widgetOptions.widgetItem).find('.field-' + id).each(function() {
                 $(this).removeClass('field-' + id).addClass('field-' + newID);
             });
             // update "for" attribute
@@ -238,7 +241,10 @@
 
                     widgetsOptions = widgetsOptions.reverse();
                     for (var i = identifiers.length - 1; i >= 1; i--) {
-                        identifiers[i] = $elem.closest(widgetsOptions[i].widgetItem).index();
+                        //identifiers[i] = $elem.closest(widgetsOptions[i].widgetItem).index();
+                        if(typeof widgetsOptions[i] !== 'undefined'){
+                            identifiers[i] = $elem.closest(widgetsOptions[i].widgetItem).index();
+                        }
                     }
                 }
 
@@ -310,12 +316,15 @@
         var widgetOptionsRoot = _getWidgetOptionsRoot(widgetOptions);
 
         // "kartik-v/yii2-widget-datepicker"
+        // var $hasDatepicker = $(widgetOptionsRoot.widgetItem).find('[data-krajee-datepicker]');
         var $hasDatepicker = $(widgetOptionsRoot.widgetItem).find('[data-krajee-kvdatepicker]');
         if ($hasDatepicker.length > 0) {
             $hasDatepicker.each(function () {
                 var $id = $(this).attr('id');
                 initDPRemove($id);
+                // $(this).parent().removeData().kvDatepicker('remove');
                 $(this).parent().kvDatepicker(eval($(this).attr('data-krajee-kvdatepicker')));
+                // $(this).parent().datepicker(eval($(this).attr('data-krajee-datepicker')));
             });
         }
 
@@ -437,7 +446,6 @@
         if ($hasTypeahead.length > 0) {
             $hasTypeahead.each(function () {
                 var id = $(this).attr('id');
-                $('#' + id).typeahead('destroy');
                 var configTypeHead = eval($(this).attr('data-krajee-typeahead'));
                 var engine = new Bloodhound({
                     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
@@ -447,6 +455,11 @@
                         wildcard: '%QUERY'
                     }
                 });
+                // $("#" + id).typeahead(null, {
+                //     name: id,
+                //     display: 'value',
+                //     source: engine
+                // });
                 kvInitTA(id, configTypeHead, {
                     display: 'value',
                     source: engine,
