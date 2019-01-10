@@ -316,7 +316,6 @@
             $hasDatepicker.each(function () {
                 var $id = $(this).attr('id');
                 initDPRemove($id);
-                $(this).parent().removeData().kvDatepicker('remove');
                 $(this).parent().kvDatepicker(eval($(this).attr('data-krajee-kvdatepicker')));
             });
         }
