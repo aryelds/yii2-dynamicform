@@ -310,7 +310,6 @@
         var widgetOptionsRoot = _getWidgetOptionsRoot(widgetOptions);
 
         // "kartik-v/yii2-widget-datepicker"
-        //var $hasDatepicker = $(widgetOptionsRoot.widgetItem).find('[data-krajee-datepicker]');
         var $hasDatepicker = $(widgetOptionsRoot.widgetItem).find('[data-krajee-kvdatepicker]');
         if ($hasDatepicker.length > 0) {
             $hasDatepicker.each(function () {
