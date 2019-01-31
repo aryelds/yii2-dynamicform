@@ -450,6 +450,7 @@
                 var engine = new Bloodhound({
                     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
                     queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    prefetch: url_prefetch,
                     remote: {
                         url: url_dynamic,
                         wildcard: '%QUERY'
@@ -463,7 +464,7 @@
                 kvInitTA(id, configTypeHead, {
                     display: 'value',
                     source: engine,
-                    limit: 10
+                    limit: 20
                 });
             });
         }
